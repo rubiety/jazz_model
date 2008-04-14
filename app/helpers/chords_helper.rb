@@ -1,0 +1,3 @@
+module ChordsHelper #:nodoc:
+end
+

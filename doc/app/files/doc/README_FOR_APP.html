@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README_FOR_APP</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README_FOR_APP</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>doc/README_FOR_APP
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Tue Mar 25 17:47:09 -0400 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Jazz Toolbox</h1>
+<p>
+Jazz Toolbox is an online Jazz utility driven by a full object-relational
+and REST model of concepts in Jazz theory, establishing relationships
+between chords and scales, and much more. The web interface is a fully
+Ajaxified Web 2.0 interface towards exploring these relationships and
+answering questions about the jazz science. The REST interface exposes the
+underlying data model and relationships to other developers wishing to use
+Jazz Toolbox as a source for their own web applications.
+</p>
+<h2>Architecture Overview</h2>
+<p>
+The core of Jazz Toolbox is a full Ruby object model representing concepts
+of Jazz theory, distilled to their most basic concepts and architected in a
+very abstract manner. The system is data-centric and all &quot;rules&quot;
+(for example, the tones in a C7 chord) in theory are self-contained in the
+database.
+</p>
+<p>
+All chord/scale/mode/etc. definitions are stored as a mathematical system
+(sequences of numbers) which are then used to perform calculations. For
+example, putting some chord in a different key is a matter of adding a
+semitone delta and doing modulo 12.
+</p>
+<p>
+While there are currently many chord calculators in existance, to my
+knowledge this project is the first one that attempts to fully represent
+the entirety of Jazz theory as a mathmetical/computational system exposed
+through an elegant object model.
+</p>
+<h2>Current State</h2>
+<p>
+Currently Jazz Toolbox is only a Ruby object model but will eventually be
+coupled with a nice front-end at JazzToolbox.com. The object model is built
+using ActiveRecord (ORM for Rails) and makes extensive use of powerful
+features in ActiveRecord such as Module mixins on
+<tt>AssociationProxy</tt>. Dispite being backed by a database, almost the
+entire database is cached into memory for fast calculation and performance,
+as the data representation and calculations are somewhat more complex than
+what can be afforded using only SQL. A Data Mapper ORM implementation may
+be in the works, if I can figure out a substitute for ActiveRecord
+Association Extensions.
+</p>
+<p>
+Also, the current database consists entirely of my own personal knowledge
+of Jazz theory. I haven&#8216;t yet scoured through the Jazz theory
+literature to formalize and expand the current database of chords, scales,
+and chord-scales.
+</p>
+<h2>Core Features</h2>
+<ul>
+<li>Very Clean API
+
+</li>
+<li><a href="../../classes/Scale.html">Scale</a> &amp; <a
+href="../../classes/Mode.html">Mode</a> Enumeration
+
+</li>
+<li>Handles Variety of Notations
+
+</li>
+<li><a href="../../classes/ChordTone.html">ChordTone</a> Enumeration
+
+</li>
+<li>Traversing ScaleChord Relationships with Strength Metric
+
+</li>
+<li>Full Understanding of Theoretic Tones (vs. only Pitches)
+
+</li>
+<li>Voicings Associated with Chords
+
+</li>
+</ul>
+<h2>Anticipated Future Features</h2>
+<ul>
+<li><a href="../../classes/Chord.html">Chord</a> Progression Analysis
+
+</li>
+<li>MIDI Integration
+
+</li>
+<li>User Comments &amp; Contributions (such as <a
+href="../../classes/Chord.html">Chord</a>-<a
+href="../../classes/Scale.html">Scale</a> recommendations)
+
+</li>
+<li>Melodic Components &amp; Licks
+
+</li>
+</ul>
+<h2>Ruby API Examples</h2>
+<ul>
+<li>Getting a <a href="../../classes/Chord.html">Chord</a> object:
+
+<pre>
+ Chord['maj7']
+ Chord['Bbmaj7']  # &lt;- With Key Context
+ Chord['Abmaj7#11']
+ ...
+</pre>
+</li>
+<li>Getting a <a href="../../classes/Scale.html">Scale</a> object:
+
+<pre>
+ Scale['Major']
+ Scale['Melodic Minor']
+ Scale['Diminished']
+ ...
+</pre>
+</li>
+<li>Getting a particular mode of a scale:
+
+<pre>
+ Scale['Major'].modes['Dorian']  # By Mode Name
+ Scale['Major'].modes[2]  # By Mode Index
+
+ # Or directly index the scale object (same as above):
+ Scale['Major']['Dorian']
+ Scale['Major'][2]
+</pre>
+</li>
+<li>Enumerate notes of a <a href="../../classes/Chord.html">Chord</a>:
+
+<pre>
+ Chord['maj'].notes   # Defaults to C without specified key context
+ # =&gt; ['C', 'E', 'G']
+
+ Chord['Ebmaj7'].notes
+ # =&gt; ['Eb', 'G', 'Bb', 'D']
+
+ # Or specify key context with chained methods like this...
+ Chord['maj7'].in_key_of('Eb').notes
+
+ Chord['Bmaj7#11'].notes
+ # =&gt; ['B', 'D#', 'F#', 'A#', 'E#']
+ # Note E# - Correct theoretic value for this chord, not F
+
+ Chord['Falt'].notes
+ Chord['F7b9#9'].notes
+ # =&gt; ['F', 'A', 'Eb', 'Gb', 'G#', 'C#']
+
+ Chord['Gbmaj7'].notes
+ # =&gt; ['Gb', 'Bb', 'Db', 'F']
+
+ # But...
+
+ Chord['F#maj7'].notes
+ # =&gt; ['F#', 'A#', 'C#', 'E#']
+</pre>
+</li>
+<li>Enumerate notes of a <a href="../../classes/Scale.html">Scale</a>:
+
+<pre>
+ Scale['Major'].notes  # Defaults to C without specified key context
+ # =&gt; ['C', 'D', 'E', 'F', 'G', 'A', 'B']
+
+ Scale['Eb Major'].notes
+ # =&gt; ['Eb', 'F', 'G', 'Ab', 'Bb', 'C', 'D']
+
+ # Or specify key context with chained methods like this:
+ Scale['Major'].in_key_of('Eb').notes
+
+ Scale['Whole Tone'].notes
+ # =&gt; ['C', 'D', 'E', 'F#', 'G#', 'Bb']
+
+ Scale['Bebop'].notes
+ # =&gt; ['C', 'D', 'E', 'F', 'G', 'A', 'Bb', 'B']
+</pre>
+</li>
+<li>Enumerate notes from a <a href="../../classes/Scale.html">Scale</a> <a
+href="../../classes/Mode.html">Mode</a>:
+
+<pre>
+ Scale['Major'].in_key_of('Eb').modes['Dorian'].notes
+ # =&gt; ['F', 'G', 'Ab', 'Bb', 'C', 'D', 'Eb']
+
+ Scale['Melodic Minor']['Lydian Dominant'].notes
+ # =&gt; ['F', 'G', 'A', 'B', 'C', 'D', 'Eb']
+</pre>
+</li>
+<li>Enumerate scale modes associated with a chord:
+
+<pre>
+ Chord['min7'].modes.names  # .names == .map(&amp;:name)
+ # =&gt; ['Dorian']
+ Chord['min7'].modes[0].scale.name
+ # =&gt; &quot;Major&quot;
+
+ Chord['Amin7'].modes.names
+ # =&gt; ['A Dorian']
+</pre>
+</li>
+<li>Enumerate chords associated with a scale mode:
+
+<pre>
+ Scale['Major']['Dorian'].chords.symbols
+ # =&gt; ['min7', 'min6']
+
+ Scale['Major'][4].chords.symbols
+       # =&gt; ['maj7#11']
+</pre>
+</li>
+<li>Ruby Example Problem: Find all chords associated with the Major (Ionian)
+scale and print each on a new line with the chord tones.
+
+<pre>
+ Scale['Major'].chords.map {|c| c.name + ': ' + c.notes.join(', ')} * &quot;\n&quot;
+ # =&gt; Major 7: C, E, G, B
+            Major 6: C, E, G, A
+            Dominant 6/9: C, E, G, Bb, D, A
+</pre>
+</li>
+</ul>
+<p>
+These examples should show that with the power of Ruby and the elegant
+nature of this API, extracting Jazz data from the system is a breeze (even
+fun!).
+</p>
+<h2>REST API</h2>
+<p>
+The REST API provides a simple XML web service interface to the underlying
+Jazz object model. Most of the examples are very straightforward since the
+URLs are simple resources. XML and JSON outputs are supported. For Rails
+developers, the best way to learn about the REST API is to examine the
+routes file, which is here:
+</p>
+<h4>Routes File</h4>
+<pre>
+        &lt;tt&gt;
+  map.resources :chord_qualities do |chord_qualities|
+                chord_qualities.resources :chords do |chords|
+                        chords.resources :notes
+                end
+        end
+
+  map.resources :scales do |scales|
+                scales.resources :modes do |modes|
+                        modes.resources :chords
+                end
+
+                scales.resources :chords
+                scales.resources :tones
+                scales.resources :notes
+        end
+
+  map.resources :chords do |chords|
+                chords.resources :symbols
+                chords.resources :voicings
+                chords.resources :modes
+                chords.resources :tones
+                chords.resources :notes
+        end
+
+        map.resources :notes_collection do |notes_collection|
+                notes_collection.resources :chords
+        end
+        &lt;/tt&gt;
+</pre>
+<h4>REST API Examples</h4>
+<ul>
+<li>List all chords:
+
+<pre>
+ GET /chords.xml
+ # =&gt; &lt;chords&gt;
+        &lt;chord name=&quot;Minor 7&quot;&gt;
+          &lt;symbols&gt;
+            &lt;symbol name=&quot;min7&quot; /&gt;
+            &lt;symbol name=&quot;m7&quot; /&gt;
+          &lt;symbols&gt;
+        &lt;/chord&gt;
+        ...
+      &lt;/chords&gt;
+</pre>
+</li>
+<li>Show <a href="../../classes/Chord.html">Chord</a> (Without <a
+href="../../classes/Key.html">Key</a> Context):
+
+<pre>
+ GET /chords/min7.xml
+</pre>
+</li>
+<li>Show <a href="../../classes/Chord.html">Chord</a> (With <a
+href="../../classes/Key.html">Key</a> Context):
+
+<pre>
+ GET /chords/Bbmin7.xml
+</pre>
+</li>
+<li>Enumerate notes in a given chord:
+
+<pre>
+ GET /chords/Cmin7/notes.xml
+ # =&gt; &lt;notes&gt;
+        &lt;note name=&quot;C&quot; /&gt;
+        &lt;note name=&quot;D&quot; /&gt;
+        &lt;note name=&quot;Eb&quot; /&gt;
+        ...
+      &lt;/notes&gt;
+</pre>
+</li>
+<li>List all scales:
+
+<pre>
+ GET /scales.xml
+ # =&gt; &lt;scales&gt;
+        &lt;scale name=&quot;Major&quot;&gt;
+          &lt;modes&gt;
+            &lt;mode name=&quot;Ionian&quot; mode=&quot;1&quot; /&gt;
+            &lt;mode name=&quot;Dorian&quot; mode=&quot;2&quot; /&gt;
+            ...
+          &lt;/modes&gt;
+        &lt;/scale&gt;
+      &lt;/scales&gt;
+</pre>
+</li>
+<li>Show <a href="../../classes/Scale.html">Scale</a>:
+
+<pre>
+ GET /scales/major.xml
+</pre>
+</li>
+<li>Show <a href="../../classes/Mode.html">Mode</a>:
+
+<pre>
+ GET /scales/major/modes/dorian.xml
+</pre>
+</li>
+<li>Enumerate notes in a given scale:
+
+<pre>
+ GET /scales/major/modes/ionian/notes.xml
+ # OR:
+ GET /scales/major/notes.xml  # Defaults to 1st Mode
+
+ # =&gt; &lt;notes&gt;
+        &lt;note name=&quot;C&quot; /&gt;
+        &lt;note name=&quot;D&quot; /&gt;
+        &lt;note name=&quot;E&quot; /&gt;
+        ...
+      &lt;/notes&gt;
+</pre>
+</li>
+<li>Enumerate chords associated with a scale mode:
+
+<pre>
+ GET /scales/major/modes/dorian/chords.xml
+ # =&gt; &lt;chords&gt;
+        &lt;chord name=&quot;Minor 7&quot; /&gt;
+        &lt;chord name=&quot;Minor 6&quot; /&gt;
+        ...
+      &lt;/chords&gt;
+</pre>
+</li>
+<li>Enumerate scale modes associated with a chord:
+
+<pre>
+ GET /chords/min7/modes.xml
+ # =&gt; &lt;modes&gt;
+        &lt;mode name=&quot;Dorian&quot; mode=&quot;2&quot;&gt;
+          &lt;scale name=&quot;Major&quot; /&gt;
+        &lt;/mode&gt;
+                                      ...
+      &lt;/modes&gt;
+</pre>
+</li>
+<li>Enumerate all potential chords matched from a list of notes:
+
+<pre>
+ GET /note_list/C,E,G,A/chords.xml
+ # =&gt; &lt;chords&gt;
+        &lt;chord name=&quot;Minor 7&quot; key=&quot;A&quot; /&gt;
+        &lt;chord name=&quot;Major 6&quot; key=&quot;C&quot; /&gt;
+      &lt;/chords&gt;
+</pre>
+</li>
+</ul>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+module ApplicationHelper #:nodoc:
+end

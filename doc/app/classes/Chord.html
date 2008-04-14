@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Class: Chord</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Class</strong></td>
+          <td class="class-name-in-header">Chord</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../files/app/models/chord_rb.html">
+                app/models/chord.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        <tr class="top-aligned-row">
+            <td><strong>Parent:</strong></td>
+            <td>
+                ActiveRecord::Base
+            </td>
+        </tr>
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+A chord object represents a chord defined as an unordered collection of
+tones (non-octaval). Mixes in the <tt><a
+href="KeyContext.html">KeyContext</a></tt> module to provide optional key
+context on the chord.
+</p>
+<h2>Creating a <a href="Chord.html">Chord</a></h2>
+<p>
+Chords should be created by indexing the <tt><a
+href="Chord.html">Chord</a></tt> class like an array, like so:
+</p>
+<pre>
+  Chord[symbol]
+</pre>
+<p>
+An alternative method of resolving a chord is to use the <tt><a
+href="Chord.html#M000062">resolve</a></tt> method, though this is likely to
+become deprecated in the future when chord progression
+support/representation is added:
+</p>
+<pre>
+  Chord.resolve(symbol)
+</pre>
+<p>
+This resolves a specified chord symbol into a new chord object using data
+regarding chord symbol-to-chord relationships. <tt>symbol</tt> can be any
+standard jazz chord symbol representable as plain ASCII (unicode support
+for other symbols such as full-diminished circle in the works). Can be
+prefixed with a key.
+</p>
+<h2>Object Relationships</h2>
+<p>
+A chord object has the following associations, exposed by methods:
+</p>
+<ul>
+<li><tt>symbols</tt> - Associated chord symbols.
+
+</li>
+<li><tt>primary_symbol</tt> - Primary chord symbol.
+
+</li>
+<li><tt>chord_scales</tt> - <a href="Chord.html">Chord</a>-scale relationship
+objects. See <a href="ChordScale.html">ChordScale</a>.
+
+</li>
+<li><tt>modes</tt> - Direct access to associated scale modes through
+<tt>chord_scales</tt>.
+
+</li>
+<li><tt>tones</tt> - Sequence of tones associated with the chord. See <tt><a
+href="ToneSequence.html">ToneSequence</a></tt>.
+
+</li>
+<li><tt>voicings</tt> - Voicings associated with this chord.#
+
+</li>
+</ul>
+<h2>Example Usage</h2>
+<h3>Creating Chords Without <a href="Key.html">Key</a> Context</h3>
+<pre>
+  Chord['maj']
+  Chord['min7'
+  Chord['maj7#11']
+  Chord['7#9']
+</pre>
+<h3>Creating Chords With <a href="Key.html">Key</a> Context</h3>
+<pre>
+  Chord['C7']
+  Chord['Bbalt']
+  Chord['Gbmaj7']
+</pre>
+<h3>Getting <a href="Chord.html">Chord</a> Notes</h3>
+<p>
+Use <tt>notes</tt> to retrieve a collection of notes, which actually
+delegates to +tones.notes+:
+</p>
+<pre>
+  Chord['C7'].notes
+  # =&gt; ['C', 'E', 'G', 'Bb']
+
+  Chord['Cmaj7#11'].notes
+  # =&gt; [&quot;C&quot;, &quot;E&quot;, &quot;G&quot;, &quot;B&quot;, &quot;F#&quot;]
+</pre>
+<h3>Correctly Interpets Theoretical Keys (not just pitches)</h3>
+<p>
+Note the 11 is correctly interpreted as E# and not enharmonic F here:
+</p>
+<pre>
+  Chord['Bmaj7#11'].notes
+  # =&gt; [&quot;B&quot;, &quot;D#&quot;, &quot;F#&quot;, &quot;A#&quot;, &quot;E#&quot;]
+</pre>
+<p>
+Also correctly interpet tones off of enharmonic base keys:
+</p>
+<pre>
+  Chord['Gbmaj7'].notes
+  # =&gt; [&quot;Gb&quot;, &quot;Bb&quot;, &quot;Db&quot;, &quot;F&quot;]
+  Chord['F#maj7'].notes
+  # =&gt; [&quot;F#&quot;, &quot;A#&quot;, &quot;C#&quot;, &quot;E#&quot;]
+</pre>
+<h3>See Related Scales</h3>
+<pre>
+  Chord['min7'].modes.names  # .names == .map(&amp;:name)
+  # =&gt; ['Dorian']
+  Chord['min7'].modes[0].scale.name
+  # =&gt; &quot;Major&quot;
+
+  Chord['Amin7'].modes.names
+  # =&gt; ['A Dorian']
+</pre>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000063">cache</a>&nbsp;&nbsp;
+      <a href="#M000062">resolve</a>&nbsp;&nbsp;
+      <a href="#M000061">symbols_list</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+    <div id="includes">
+      <h3 class="section-bar">Included Modules</h3>
+
+      <div id="includes-list">
+        <span class="include-name"><a href="KeyContext.html">KeyContext</a></span>
+      </div>
+    </div>
+
+    <div id="section">
+
+
+
+    <div id="aliases-list">
+      <h3 class="section-bar">External Aliases</h3>
+
+      <div class="name-list">
+                        <table summary="aliases">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">resolve</td>
+          <td>-&gt;</td>
+          <td class="context-item-value">[]</td>
+        </tr>
+                        </table>
+      </div>
+    </div>
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Class methods</h3>
+
+      <div id="method-M000063" class="method-detail">
+        <a name="M000063"></a>
+
+        <div class="method-heading">
+          <a href="#M000063" class="method-signature">
+          <span class="method-name">cache</span><span class="method-args">(conditions = [])</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Retreives Fully-Cached Array
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000063-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000063-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/chord.rb, line 139</span>
+139:         <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">cache</span>(<span class="ruby-identifier">conditions</span> = [])
+140:                 <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">:all</span>, <span class="ruby-identifier">:include</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-identifier">:tones</span>, <span class="ruby-identifier">:symbols</span>], <span class="ruby-identifier">:conditions</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">conditions</span>) <span class="ruby-comment cmt"># Rails 2.0 Already Caches!</span>
+141:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000062" class="method-detail">
+        <a name="M000062"></a>
+
+        <div class="method-heading">
+          <a href="#M000062" class="method-signature">
+          <span class="method-name">resolve</span><span class="method-args">(symbol)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Resolves a chord symbol into a chord. Implementation is somewhat flakey due
+to the potential ambiguities arising from specifying key and symbols
+together.
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000062-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000062-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/models/chord.rb, line 106</span>
+106:                 <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resolve</span>(<span class="ruby-identifier">symbol</span>)
+107:                         <span class="ruby-identifier">in_key</span> = <span class="ruby-keyword kw">nil</span>
+108:                   
+109:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">symbol</span>.<span class="ruby-identifier">nil?</span>
+110:                         
+111:                         <span class="ruby-constant">Key</span>.<span class="ruby-identifier">cache</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+112:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">symbol</span>.<span class="ruby-identifier">starts_with?</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">name</span>)
+113:                                         <span class="ruby-identifier">in_key</span> = <span class="ruby-identifier">k</span>
+114:                                         <span class="ruby-identifier">symbol</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">name</span>, <span class="ruby-value str">''</span>).<span class="ruby-identifier">strip</span>
+115:                                         <span class="ruby-keyword kw">break</span>
+116:                                 <span class="ruby-keyword kw">end</span>
+117:                         <span class="ruby-keyword kw">end</span>
+118:                         
+119:                         <span class="ruby-identifier">chord_symbol</span> = <span class="ruby-constant">ChordSymbol</span>[<span class="ruby-identifier">symbol</span>]
+120:                         
+121:                         <span class="ruby-comment cmt"># Perhaps the matched key was really part of the name of the chord, try that:</span>
+122:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">chord_symbol</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">in_key</span>.<span class="ruby-identifier">nil?</span>
+123:                                 <span class="ruby-identifier">symbol</span> = <span class="ruby-identifier">in_key</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">symbol</span>
+124:                                 <span class="ruby-identifier">chord_symbol</span> = <span class="ruby-constant">ChordSymbol</span>[<span class="ruby-identifier">symbol</span>]
+125:                         <span class="ruby-keyword kw">end</span>
+126:                         
+127:                         <span class="ruby-comment cmt"># If still not found, must be invalid:</span>
+128:                         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">nil</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">chord_symbol</span>.<span class="ruby-identifier">nil?</span>
+129:                         
+130:                         <span class="ruby-identifier">chord</span> = <span class="ruby-identifier">chord_symbol</span>.<span class="ruby-identifier">chord</span>
+131:                         <span class="ruby-identifier">chord</span>.<span class="ruby-identifier">key</span> = <span class="ruby-identifier">in_key</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">in_key</span>.<span class="ruby-identifier">nil?</span>
+132:                         <span class="ruby-identifier">chord</span>
+133:                 <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000061" class="method-detail">
+        <a name="M000061"></a>
+
+        <div class="method-heading">
+          <a href="#M000061" class="method-signature">
+          <span class="method-name">symbols_list</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000061-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000061-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/models/chord.rb, line 97</span>
+97:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">symbols_list</span>
+98:                 <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">symbols</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">name</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-value str">', '</span>)
+99:         <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

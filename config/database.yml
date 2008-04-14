@@ -1,0 +1,23 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  database: jazzinator_dev
+  username: jazzinator
+  password: jazz0102$
+  hostname: 127.0.0.1
+
+test:
+  adapter: mysql
+  encoding: utf8
+  database: jazzinator_test
+  username: jazzinator
+  password: jazz0102$
+  hostname: 127.0.0.1
+
+production:
+  adapter: mysql
+  encoding: utf8
+  database: jazztoolbox
+  username: jazztoolbox
+  password: jtb0102$
+  hostname: 127.0.0.1
