@@ -1,7 +1,8 @@
 set :application, "jazztoolbox"
-set :repository, "http://svn.synenterprises.com/#{application}/trunk"
+set :repository, "git@github.com:railsgarden/jazztoolbox.git"
 
-set :scm, :subversion
+set :scm, :git
+set :branch, 'origin/master'
 
 task :production do
 	role :web, "cedar.synenterprises.com"
