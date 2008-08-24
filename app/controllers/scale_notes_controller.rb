@@ -4,8 +4,8 @@
 # scale.  See +ScaleTonesController+ for information about scale tones.
 # 
 class ScaleNotesController < ApplicationController
-	before_filter :get_scale_notes, :only => [:index]
-	before_filter :get_scale_note, :except => [:index, :new, :create]
+	before_filter :find_scale_notes, :only => [:index]
+	before_filter :find_scale_note, :except => [:index, :new, :create]
 	
   # GET /scale/Cmajor/notes
   # GET /scale/Cmajor/notes.xml
@@ -32,18 +32,20 @@ class ScaleNotesController < ApplicationController
 	
 	protected
 	
-	def get_scale_notes
-		get_scale
+	def find_scale_notes
+		find_scale
+		
 		@scale_notes = @scale.notes
 	end
 	
-	def get_scale_note
-		get_scale
-		get_scale_notes
+	def find_scale_note
+		find_scale
+		find_scale_notes
+		
 		@scale_note = @scale_notes[params[:id].to_i]
 	end
 	
-	def get_scale
+	def find_scale
 		@scale = Scale[params[:scale_id]]
 	end
 	

@@ -6,8 +6,8 @@
 # * +NotesCollection+ - Shows potential chord matches with a NotesCollection.
 # 
 class ChordsController < ApplicationController
-	before_filter :get_chords, :only => [:index]
-	before_filter :get_chord, :except => [:index]
+	before_filter :find_chords, :only => [:index]
+	before_filter :find_chord, :except => [:index]
 	
   # GET /chords
   # GET /chords.xml
@@ -34,29 +34,31 @@ class ChordsController < ApplicationController
 	
 	protected
 	
-	def get_chords
-		get_relateds
+	def find_chords
+		find_relateds
+		
 		@chords = case 
-		when @mode then @mode.chords
-	  when @scale then @scale.chords
-		when @chord_quality then @chord_quality.chords
-		when @notes_collection then @notes_collection.chords
-		else Chord.find(:all, :include => [:symbols])
+		  when @mode then @mode.chords
+	    when @scale then @scale.chords
+		  when @chord_quality then @chord_quality.chords
+		  when @notes_collection then @notes_collection.chords
+		  else Chord.find(:all, :include => [:symbols])
 		end
 	end
 	
-	def get_chord
-		get_relateds
+	def find_chord
+		find_relateds
+		
 		@chord = case
-		when @mode then @mode.chords[params[:id]]
-		when @scale then @scale.chords[params[:id]]
-		when @chord_quality then @chord_quality.chords[params[:id]]
-		when @notes_collection then @notes_collection.chords[params[:id]]
-		else Chord[params[:id]]
+		  when @mode then @mode.chords[params[:id]]
+		  when @scale then @scale.chords[params[:id]]
+		  when @chord_quality then @chord_quality.chords[params[:id]]
+		  when @notes_collection then @notes_collection.chords[params[:id]]
+		  else Chord[params[:id]]
 		end
 	end
 	
-	def get_relateds
+	def find_relateds
 		@scale = Scale[params[:scale_id]] if params[:scale_id]
 		@mode = @scale.modes[params[:mode_id]] if params[:mode_id] and @scale
 		@chord_quality = ChordQuality[params[:chord_quality_id]] if params[:chord_quality_id]

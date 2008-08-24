@@ -4,8 +4,8 @@
 # from the chord.
 # 
 class ChordNotesController < ApplicationController
-	before_filter :get_chord_notes, :only => [:index]
-	before_filter :get_chord_note, :except => [:index]
+	before_filter :find_chord_notes, :only => [:index]
+	before_filter :find_chord_note, :except => [:index]
 	
   # GET /chord/Cmaj7/notes
   # GET /chord/Cmaj7/notes.xml
@@ -32,18 +32,18 @@ class ChordNotesController < ApplicationController
 	
 	protected
 	
-	def get_chord_notes
+	def find_chord_notes
 		get_chord
 		@chord_notes = @chord.notes
 	end
 	
-	def get_chord_note
+	def find_chord_note
 		get_chord
 		get_chord_notes
 		@chord_note = @chord.notes[params[:id].to_i + 1]
 	end
 	
-	def get_chord
+	def find_chord
 		@chord = Chord[params[:chord_id]]
 	end
 	

@@ -7,8 +7,8 @@
 # See +ScaleNotesController+.
 # 
 class ScaleTonesController < ApplicationController
-	before_filter :get_scale_tones, :only => [:index]
-	before_filter :get_scale_tone, :except => [:index, :new, :create]
+	before_filter :find_scale_tones, :only => [:index]
+	before_filter :find_scale_tone, :except => [:index, :new, :create]
 	
   # GET /scale/Cmaj7/tones
   # GET /scale/Cmaj7/tones.xml
@@ -35,17 +35,19 @@ class ScaleTonesController < ApplicationController
 	
 	protected
 	
-	def get_scale_tones
-		get_scale
+	def find_scale_tones
+		find_scale
+		
 		@scale_tones = @scale.tones.all
 	end
 	
-	def get_scale_tone
-		get_scale
+	def find_scale_tone
+		find_scale
+		
 		@scale_tone = @scale.tones.all.detect {|ct| ct.position.to_s == params[:id]}
 	end
 	
-	def get_scale
+	def find_scale
 		@scale = Scale[params[:scale_id]]
 	end
 end

@@ -9,8 +9,8 @@
 # See +ChordNotesController+.
 # 
 class ChordTonesController < ApplicationController
-	before_filter :get_chord_tones, :only => [:index]
-	before_filter :get_chord_tone, :except => [:index, :new, :create]
+	before_filter :find_chord_tones, :only => [:index]
+	before_filter :find_chord_tone, :except => [:index, :new, :create]
 	
   # GET /chord/Cmaj7/tones
   # GET /chord/Cmaj7/tones.xml
@@ -37,17 +37,17 @@ class ChordTonesController < ApplicationController
 	
 	protected
 	
-	def get_chord_tones
-		get_chord
+	def find_chord_tones
+		find_chord
 		@chord_tones = @chord.tones.all
 	end
 	
-	def get_chord_tone
-		get_chord
+	def find_chord_tone
+		find_chord
 		@chord_tone = @chord.tones.all.detect {|ct| ct.position.to_s == params[:id]}
 	end
 	
-	def get_chord
+	def find_chord
 		@chord = Chord[params[:chord_id]]
 	end
 	

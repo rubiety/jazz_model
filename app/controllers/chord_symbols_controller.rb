@@ -5,8 +5,8 @@
 # * Chord Context - Access chord symbols from a given chord.
 # 
 class ChordSymbolsController < ApplicationController
-	before_filter :get_chord_symbols, :only => [:index]
-	before_filter :get_chord_symbol, :except => [:index]
+	before_filter :find_chord_symbols, :only => [:index]
+	before_filter :find_chord_symbol, :except => [:index]
 	
   # GET /chord_symbols
   # GET /chord_symbols.xml
@@ -33,17 +33,17 @@ class ChordSymbolsController < ApplicationController
 	
 	protected
 	
-	def get_chord_symbols
-		get_chord
+	def find_chord_symbols
+		find_chord
 		@chord_symbols = @chord ? @chord.symbols : ChordSymbol.find(:all)
 	end
 	
-	def get_chord_symbol
-		get_chord
+	def find_chord_symbol
+		find_chord
 		@chord_symbol = @chord ? @chord.symbols[params[:id]] : ChordSymbol[params[:id]]
 	end
 	
-	def get_chord
+	def find_chord
 		@chord = Chord[params[:chord_id]]
 	end
 end

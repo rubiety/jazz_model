@@ -4,8 +4,8 @@
 # a given scale.
 # 
 class ModesController < ApplicationController
-	before_filter :get_modes, :only => [:index]
-	before_filter :get_mode, :except => [:index]
+	before_filter :find_modes, :only => [:index]
+	before_filter :find_mode, :except => [:index]
 	
 	# GET /scales/major/modes
   # GET /scales/major/modes.xml
@@ -32,21 +32,23 @@ class ModesController < ApplicationController
 	
 	protected
 	
-	def get_modes
-		get_relateds
+	def find_modes
+		find_relateds
+		
 		@modes = case
-		when @scale then @scale.modes
-		when @chord then @chord.modes
-		else Mode.find(:all)
+		  when @scale then @scale.modes
+		  when @chord then @chord.modes
+		  else Mode.find(:all)
 		end
 	end
 	
-	def get_mode
-		get_relateds
+	def find_mode
+		find_relateds
+		
 		@mode = @scale.modes[params[:id]]
 	end
 	
-	def get_relateds
+	def find_relateds
 		@scale = Scale[params[:scale_id]] if params[:scale_id]
 		@chord = Chord[params[:chord_id]] if params[:chord_id]
 	end

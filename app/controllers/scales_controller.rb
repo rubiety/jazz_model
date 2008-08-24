@@ -3,8 +3,8 @@
 # Acesses scales available in direct context only.
 # 
 class ScalesController < ApplicationController
-	before_filter :get_scales, :only => [:index]
-	before_filter :get_scale, :except => [:index]
+	before_filter :find_scales, :only => [:index]
+	before_filter :find_scale, :except => [:index]
 	
   # GET /scales
   # GET /scales.xml
@@ -33,11 +33,11 @@ class ScalesController < ApplicationController
 	
 	private
 	
-	def get_scales
+	def find_scales
 		@scales = Scale.find(:all)
 	end
 	
-	def get_scale
+	def find_scale
 		@scale = Scale[params[:id]]
 	end
 	
