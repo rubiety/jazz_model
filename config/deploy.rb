@@ -2,12 +2,15 @@ set :application, "jazztoolbox"
 set :repository, "git@github.com:railsgarden/jazztoolbox.git"
 
 set :scm, :git
-set :branch, 'origin/master'
+set :branch, 'master'
+set :deploy_via, :remote_cache
+
+set :ssh_options, {:forward_agent => true}
 
 task :production do
-	role :web, "cedar.synenterprises.com"
-	role :app, "cedar.synenterprises.com"
-	role :db,  "cedar.synenterprises.com", :primary => true
+	role :web, "jazztoolbox.com"
+	role :app, "jazztoolbox.com"
+	role :db,  "jazztoolbox.com", :primary => true
   
 	set :rails_env, "production"
 	set :deploy_to, "/var/www/jazztoolbox.com/app"
@@ -16,41 +19,9 @@ task :production do
 end
 
 namespace :deploy do
-  task :restart do
-	  restart_mongrel
-	end
-	
-	task :start do
-		start_mongrel
-	end
-	
-	task :stop do
-		stop_mongrel
-	end
-	
-	task :restart_mongrel do
-		stop_mongrel
-		start_mongrel
-	end
-	
-	task :start_mongrel do
-		begin
-			sudo "mongrel_rails cluster::start -C #{release_path}/config/mongrel_cluster.yml"
-		rescue RuntimeError => e
-			puts e
-			puts "!! Mongrel appears to be up already."
-		end
-	end
-	
-	task :stop_mongrel do
-		begin
-			sudo "mongrel_rails cluster::stop -C #{release_path}/config/mongrel_cluster.yml"
-		rescue RuntimeError => e
-			puts e
-			puts "!! Mongrel appears to be down already."
-		end
-	end
-	
+  task :restart, :roles => :app do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
 end
 
 after "deploy:update_code", :create_permissions
