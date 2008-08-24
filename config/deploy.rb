@@ -8,7 +8,7 @@ task :production do
 	role :web, "cedar.synenterprises.com"
 	role :app, "cedar.synenterprises.com"
 	role :db,  "cedar.synenterprises.com", :primary => true
-
+  
 	set :rails_env, "production"
 	set :deploy_to, "/var/www/jazztoolbox.com/app"
 	set :user, "bhughes"

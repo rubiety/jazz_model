@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.0.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.1' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -37,7 +37,7 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_Jazzinator_session',
+    :session_key => '_jazztoolbox_session',
     :secret      => '35aba4b5464f6b1538698559e8d269635dc853070e29ad807ef166d922bde32a4a55440b5dca2fd9e30a0be91fa4f3cf6723ee8d04e21d31ba4cc99373c9cc0c'
   }
 
