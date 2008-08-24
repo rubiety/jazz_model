@@ -33,13 +33,13 @@ class ChordNotesController < JazzController
 	protected
 	
 	def find_chord_notes
-		get_chord
+		find_chord
 		@chord_notes = @chord.notes
 	end
 	
 	def find_chord_note
-		get_chord
-		get_chord_notes
+		find_chord
+		find_chord_notes
 		@chord_note = @chord.notes[params[:id].to_i + 1]
 	end
 	
