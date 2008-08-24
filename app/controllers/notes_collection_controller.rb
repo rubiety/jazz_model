@@ -5,7 +5,7 @@
 # Right now, the only implemented subresource is "chords" which lists chords (directly,
 # or any inversion thereof) that have a direct match to the list of notes provided.
 # 
-class NotesCollectionController < ApplicationController
+class NotesCollectionController < JazzController
   
   # GET /notes_collection/C,E,G,A
   # GET /notes_collection/C,E,G,A.xml

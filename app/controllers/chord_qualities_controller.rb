@@ -3,7 +3,7 @@
 # Directly accessible API for chord qualities, which are currently 
 # not used much within the system.
 # 
-class ChordQualitiesController < ApplicationController
+class ChordQualitiesController < JazzController
   
   # GET /chord_qualities
   # GET /chord_qualities.xml

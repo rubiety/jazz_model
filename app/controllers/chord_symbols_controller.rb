@@ -4,7 +4,7 @@
 # * Direct Context - Directly access all chord symbols.
 # * Chord Context - Access chord symbols from a given chord.
 # 
-class ChordSymbolsController < ApplicationController
+class ChordSymbolsController < JazzController
 	before_filter :find_chord_symbols, :only => [:index]
 	before_filter :find_chord_symbol, :except => [:index]
 	

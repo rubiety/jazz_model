@@ -5,7 +5,7 @@
 # * +Scale+ (Delegated to Main Mode of Scale) - See chords related to the main mode of a scale.
 # * +NotesCollection+ - Shows potential chord matches with a NotesCollection.
 # 
-class ChordsController < ApplicationController
+class ChordsController < JazzController
 	before_filter :find_chords, :only => [:index]
 	before_filter :find_chord, :except => [:index]
 	

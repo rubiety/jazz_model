@@ -3,7 +3,7 @@
 # Accessible only within scale context.  Represents the defined modes of 
 # a given scale.
 # 
-class ModesController < ApplicationController
+class ModesController < JazzController
 	before_filter :find_modes, :only => [:index]
 	before_filter :find_mode, :except => [:index]
 	

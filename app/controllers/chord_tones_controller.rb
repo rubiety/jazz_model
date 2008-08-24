@@ -8,7 +8,7 @@
 # 
 # See +ChordNotesController+.
 # 
-class ChordTonesController < ApplicationController
+class ChordTonesController < JazzController
 	before_filter :find_chord_tones, :only => [:index]
 	before_filter :find_chord_tone, :except => [:index, :new, :create]
 	

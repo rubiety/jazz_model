@@ -6,7 +6,7 @@
 # 
 # See +ScaleNotesController+.
 # 
-class ScaleTonesController < ApplicationController
+class ScaleTonesController < JazzController
 	before_filter :find_scale_tones, :only => [:index]
 	before_filter :find_scale_tone, :except => [:index, :new, :create]
 	

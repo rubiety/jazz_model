@@ -3,7 +3,7 @@
 # Used within a "Chord" resource context to access notes 
 # from the chord.
 # 
-class ChordNotesController < ApplicationController
+class ChordNotesController < JazzController
 	before_filter :find_chord_notes, :only => [:index]
 	before_filter :find_chord_note, :except => [:index]
 	

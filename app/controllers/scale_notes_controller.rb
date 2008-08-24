@@ -3,7 +3,7 @@
 # Accessible within scale context only.  Represents notes in a given 
 # scale.  See +ScaleTonesController+ for information about scale tones.
 # 
-class ScaleNotesController < ApplicationController
+class ScaleNotesController < JazzController
 	before_filter :find_scale_notes, :only => [:index]
 	before_filter :find_scale_note, :except => [:index, :new, :create]
 	

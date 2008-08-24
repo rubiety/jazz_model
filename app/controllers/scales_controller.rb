@@ -2,7 +2,7 @@
 # 
 # Acesses scales available in direct context only.
 # 
-class ScalesController < ApplicationController
+class ScalesController < JazzController
 	before_filter :find_scales, :only => [:index]
 	before_filter :find_scale, :except => [:index]
 	

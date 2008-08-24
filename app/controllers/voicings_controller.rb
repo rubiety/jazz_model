@@ -1,2 +1,2 @@
-class VoicingsController < ApplicationController #:nodoc:
+class VoicingsController < JazzController #:nodoc:
 end
