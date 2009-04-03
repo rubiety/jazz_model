@@ -42,9 +42,4 @@ class Mode < ActiveRecord::Base
 		end
 	end
 	
-	# Retreives Fully-Cached Array
-	def self.cache(conditions = {})
-		self.find(:all, :include => :scale, :conditions => conditions) # Rails 2.0 Already Caches!
-	end
-	
 end

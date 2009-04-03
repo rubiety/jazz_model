@@ -9,10 +9,6 @@ describe Scale do
     @scale.should be_valid
   end
   
-  it "should cache" do
-    Scale.cache.should_not be_nil
-  end
-  
   it "should recognize symmetric scale" do
     Scale['Diminished'].should be_symmetric
   end

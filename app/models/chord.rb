@@ -108,7 +108,7 @@ class Chord < ActiveRecord::Base
 		  
 			return nil if symbol.nil?
 			
-			Key.cache.each do |k|
+			Key.all.each do |k|
 				if symbol.starts_with?(k.name)
 					in_key = k
 					symbol.sub!(k.name, '').strip
@@ -133,11 +133,6 @@ class Chord < ActiveRecord::Base
 		end
 		alias_method :[], :resolve
 		
-	end
-	
-	# Retreives Fully-Cached Array
-	def self.cache(conditions = [])
-		self.find(:all, :include => [:tones, :symbols], :conditions => conditions) # Rails 2.0 Already Caches!
 	end
 	
 end

@@ -79,7 +79,7 @@ class NotesCollection
 	private
 	
 	def chords_in_key(in_key)
-		Chord.cache.select do |c|
+		Chord.all.select do |c|
 			c.tones.map(&:tone).to_set == keys.map {|k| (k.index - (in_key ? in_key.index : 0)) % 12 }.to_set
 		end.map {|c| c.key = in_key; c}
 	end

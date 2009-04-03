@@ -13,19 +13,14 @@
 class Key < ActiveRecord::Base
 	Letters = ['C' => 0, 'D' => 1, 'E' => 2, 'F' => 3, 'G' => 4, 'A' => 5, 'B' => 6]
 	
-	# Retreives Fully-Cached Array
-	def self.cache(conditions = [])
-		self.find(:all, :conditions => []) # Rails 2.0 Already Caches!
-	end
-	
 	# Finds a key given a tonal index 0-11 and a letter index (to disambiguate enharmonic keys)
 	def self.from_index(value, preferred_letter = nil)
-		self.cache.find {|k| k.index == value && (preferred_letter.nil? || k.letter_index == preferred_letter)}
+		self.all.find {|k| k.index == value && (preferred_letter.nil? || k.letter_index == preferred_letter)}
 	end
 	
 	# Finds a key object given the name (such as Eb)
 	def self.from_name(value)
-		self.cache.find {|k| k.name == value}
+		self.all.find {|k| k.name == value}
 	end
 	
 	# Finds a key object based on the name:

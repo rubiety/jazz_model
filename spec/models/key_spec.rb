@@ -16,8 +16,4 @@ describe Key do
 	it "should treat Eb and D# as enharmonic" do
 		Key['Eb'].should be_enharmonic_with(Key['D#'])
 	end
-	
-	it "should cache items" do
-		Key.cache.size.should == Key.count
-	end
 end

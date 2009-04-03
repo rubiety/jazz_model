@@ -87,7 +87,7 @@ class Scale < ActiveRecord::Base
 		def resolve(symbol)
 			in_key = nil
 			
-			Key.cache.each do |k|
+			Key.all.each do |k|
 				if symbol.starts_with?(k.name)
 					in_key = k
 					symbol.gsub!(/^#{k.name}/, '').strip!
@@ -100,7 +100,7 @@ class Scale < ActiveRecord::Base
 			# Perhaps the matched key was really part of the name of the chord, try that:
 			if scale.nil? && !in_key.nil?
 				symbol = in_key.name + symbol
-				scale = Scale.cache.detect {|s| s.name == symbol}
+				scale = Scale.all.detect {|s| s.name == symbol}
 			end
 			
 			# If still not found, must be invalid:
@@ -110,12 +110,6 @@ class Scale < ActiveRecord::Base
 			scale
 		end
 		alias_method :[], :resolve
-	end
-	
-	# Retreives Fully-Cached Array
-	# 
-	def self.cache(conditions = [])
-		self.find(:all, :include => [:tones], :conditions => conditions) # Rails 2.0 Already Caches!
 	end
 	
 	def [](name)

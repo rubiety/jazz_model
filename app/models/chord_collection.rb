@@ -38,7 +38,7 @@ module ChordCollection
 	  
 		return nil if symbol.nil?
 		
-		Key.cache.each do |k|
+		Key.all.each do |k|
 			if symbol.starts_with?(k.name)
 				in_key = k
 				symbol.sub!(k.name, '').strip
