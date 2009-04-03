@@ -4,54 +4,58 @@ describe ChordsController do
 	before do
 		@request.env["HTTP_ACCEPT"] = "application/xml"
 	end
-
-	it "should list chords" do
-		get :index
-		response.should be_success
-	end
-
-	it "should show a C7" do
-		get :show, :id => 'C7'
-		response.should be_success
+  
+  describe "on GET to index" do
+	  before { get :index }
+	  it { should respond_with(:success) }
 	end
 	
-	describe "with mode context" do
-		it "should list chords" do
-		  get :index, :scale_id => 'Major', :mode_id => 'Dorian'
-		  response.should be_success
+	describe "on GET to show" do
+	  before { get :show, :id => 'C7' }
+	  it { should respond_with(:success) }
+	end
+	
+	context "with scale context" do
+	  describe "on GET to index" do
+  	  before { get :index, :scale_id => 'Major' }
+  	  it { should respond_with(:success) }
+  	end
+	  
+	  context "and key context" do
+	    describe "on GET to index" do
+    	  before { get :index, :scale_id => 'BbMajor' }
+    	  it { should respond_with(:success) }
+    	end
+    end
+    
+    context "with mode context" do
+  	  describe "on GET to index" do
+    	  before { get :index, :scale_id => 'Major', :mode_id => 'Dorian' }
+    	  it { should respond_with(:success) }
+    	end
+
+  	  context "and key context" do
+  	    describe "on GET to index" do
+      	  before { get :index, :scale_id => 'BbMajor', :mode_id => 'Dorian' }
+      	  it { should respond_with(:success) }
+      	end
+      end
+  	end
+	end
+	
+	context "with notes collection context" do
+	  describe "on GET to index" do
+	    before { get :index, :notes_collection_id => 'C,E,G,A' }
+	    it { should respond_with(:success) }
 	  end
 	  
-	  it "should list chords in key context" do
-	    get :index, :scale_id => 'BbMajor', :mode_id => 'Dorian'
-	    response.should be_success
-    end
-	end
-	
-	describe "with scale context" do
-		it "should list chords" do
-		  get :index, :scale_id => 'Major'
-		  response.should be_success
+	  describe "on GET to show" do
+	    before { get :show, :notes_collection_id => 'C,E,G,A', :id => 'min7' }
+	    it { should respond_with(:success) }
 	  end
 	  
-	  it "should list chords in key context" do
-	    get :index, :scale_id => 'BbMajor'
-	    response.should be_success
-    end
-	end
-	
-	describe "with notes collection context" do
-		it "should list chords" do
-			get :index, :notes_collection_id => 'C,E,G,A'
-			response.should be_success
-		end
-		
-		it "should list chords in key context" do
-		  get :index, :notes_collection_id => ''
+	  context "and key context" do
+	    it "should define specs"
 	  end
-		
-		it "should show chord" do
-			get :index, :notes_collection_id => 'C,E,G,A', :id => 'min7'
-			response.should be_success
-		end
 	end
 end

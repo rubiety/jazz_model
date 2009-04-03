@@ -5,13 +5,13 @@ describe ChordQualitiesController do
 		@request.env["HTTP_ACCEPT"] = "application/xml"
 	end
 	
-	it "should list chord qualities" do
-		get :index
-		response.should be_success
+	describe "on GET to index" do
+	  before { get :index }
+	  it { should respond_with(:success) }
 	end
 	
-	it "should show chord quality" do
-		get :show, :id => 'Major'
-		response.should be_success
+	describe "on GET to show" do
+	  before { get :show, :id => 'Major' }
+	  it { should respond_with(:success) }
 	end
 end

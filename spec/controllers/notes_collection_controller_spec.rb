@@ -5,8 +5,8 @@ describe NotesCollectionController do
 		@request.env["HTTP_ACCEPT"] = "application/xml"
 	end
 	
-	it "should show notes" do
-		get :show, :id => 'C,E,G,A'
-		response.should be_success
+	describe "on GET to show" do
+	  before { get :show, :id => 'C,E,G,A' }
+	  it { should respond_with(:success) }
 	end
 end

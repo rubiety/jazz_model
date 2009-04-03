@@ -5,31 +5,33 @@ describe ChordSymbolsController do
 		@request.env["HTTP_ACCEPT"] = "application/xml"
 	end
 	
-	it "should list chord symbols" do
-		get :index
-		response.should be_success
+	describe "on GET to index" do
+	  before { get :index }
+	  it { should respond_with(:success) }
 	end
 	
-	it "should show chord symbol" do
-		get :show, :id => 'maj7'
-		response.should be_success
+	describe "on GET to show" do
+	  before { get :show, :id => 'maj7' }
+	  it { should respond_with(:success) }
 	end
 	
 	
-	describe "with chord context" do
-		it "should list chord symbols" do
-			get :index, :chord_id => 'maj7'
-			response.should be_success
-		end
-		
-		it "should show chord symbol" do
-			get :index, :chord_id => 'maj7', :id => 'maj7'
-			response.should be_success
-		end
-		
-		it "should show chord symbol with key context" do
-			get :index, :chord_id => 'Cmaj7', :id => 'maj7'
-			response.should be_success
-		end
+	context "with chord context" do
+	  describe "on GET to index" do
+  	  before { get :index, :chord_id => 'maj7' }
+  	  it { should respond_with(:success) }
+  	end
+	  
+	  describe "on GET to show" do
+  	  before { get :show, :chord_id => 'maj7', :id => 'maj7' }
+  	  it { should respond_with(:success) }
+  	end
+  	
+  	context "and key context" do
+  	  describe "on GET to show" do
+    	  before { get :show, :chord_id => 'Cmaj7', :id => 'maj7' }
+    	  it { should respond_with(:success) }
+    	end
+  	end
 	end
 end

@@ -5,18 +5,20 @@ describe ModesController do
 		@request.env["HTTP_ACCEPT"] = "application/xml"
 	end
 	
-	it "should list all modes" do
-	  get :index
-	  response.should be_success
-  end
-	
-	it "should lists scale modes" do
-		get :index, :scale_id => 'Major'
-		response.should be_success
+	describe "on GET to index" do
+	  before { get :index }
+	  it { should respond_with(:success) }
 	end
 	
-	it "should shows a scale mode" do
-		get :show, :scale_id => 'Major', :id => 1
-		response.should be_success
+	context "in scale context" do
+	  describe "on GET to index" do
+	    before { get :index, :scale_id => 'Major' }
+	    it { should respond_with(:success) }
+	  end
+	  
+	  describe "on GET to show" do
+	    before { get :show, :scale_id => 'Major', :id => 1}
+	    it { should respond_with(:success) }
+	  end
 	end
 end
