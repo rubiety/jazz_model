@@ -87,6 +87,9 @@ class Scale < ActiveRecord::Base
 		def resolve(symbol)
 			in_key = nil
 			
+			return nil if symbol.nil?
+			symbol = symbol.dup
+			
 			Key.all.each do |k|
 				if symbol.starts_with?(k.name)
 					in_key = k

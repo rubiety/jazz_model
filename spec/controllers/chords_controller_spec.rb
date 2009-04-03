@@ -1,8 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ChordsController do
-
-	before(:each) do
+	before do
 		@request.env["HTTP_ACCEPT"] = "application/xml"
 	end
 
@@ -55,5 +54,4 @@ describe ChordsController do
 			response.should be_success
 		end
 	end
-	
 end

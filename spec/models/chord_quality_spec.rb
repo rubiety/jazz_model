@@ -1,51 +1,27 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ChordQuality do
-	before(:each) do
-		@chord_quality = ChordQuality.new
+	subject { ChordQuality.new }
+	
+	it { should be_valid }
+	
+	context "of Major" do
+	  subject { ChordQuality.find_by_name('Major') }
+    it { should be_valid }
 	end
 	
-	it "should be valid" do
-		@chord_quality.should be_valid
-	end
-end
-
-describe ChordQuality, "of Major" do
-  before(:each) do
-    @chord_quality = ChordQuality.find_by_name('Major')
-  end
-	
-  it "should be valid" do
-    @chord_quality.should be_valid
-  end
-end
-
-describe ChordQuality, "of Minor" do
-	before(:each) do
-		@chord_quality = ChordQuality.find_by_name('Minor')
+	context "of Minor" do
+	  subject { ChordQuality.find_by_name('Minor') }
+	  it { should be_valid }
 	end
 	
-	it "should be valid" do
-		@chord_quality.should be_valid
-	end
-end
-
-describe ChordQuality, "of Dominant" do
-	before(:each) do
-		@chord_quality = ChordQuality.find_by_name('Dominant')
+	context "of Dominant" do
+	  subject { ChordQuality.find_by_name('Dominant') }
+	  it { should be_valid }
 	end
 	
-	it "should be valid" do
-		@chord_quality.should be_valid
-	end
-end
-
-describe ChordQuality, "of Diminished" do
-	before(:each) do
-		@chord_quality = ChordQuality.find_by_name('Diminished')
-	end
-	
-	it "should be valid" do
-		@chord_quality.should be_valid
+	context "of Diminished" do
+	  subject { ChordQuality.find_by_name('Diminished') }
+	  it { should be_valid }
 	end
 end

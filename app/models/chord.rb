@@ -107,6 +107,7 @@ class Chord < ActiveRecord::Base
 			in_key = nil
 		  
 			return nil if symbol.nil?
+			symbol = symbol.dup
 			
 			Key.all.each do |k|
 				if symbol.starts_with?(k.name)

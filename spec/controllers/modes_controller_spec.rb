@@ -1,8 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ModesController do
-
-  before(:each) do
+  before do
 		@request.env["HTTP_ACCEPT"] = "application/xml"
 	end
 	
@@ -20,5 +19,4 @@ describe ModesController do
 		get :show, :scale_id => 'Major', :id => 1
 		response.should be_success
 	end
-	
 end

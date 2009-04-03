@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe ChordCollection do
-  before(:each) do
+  before do
     @chords = Scale['Major'].modes[1].chords
   end
 	

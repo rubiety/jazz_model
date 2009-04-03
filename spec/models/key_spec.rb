@@ -1,16 +1,12 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Key do
-  before(:each) do
-    @key = Key.new
-  end
-	
   it "should default to C" do
     Key::DEFAULT.name.should == "C"
   end
 	
 	it "should expose 12 primary keys" do
-		Key.primaries.size.should == 12
+		Key.should have(12).primaries
 	end
 	
 	it "should treat Eb and D# as enharmonic" do
