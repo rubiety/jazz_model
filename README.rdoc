@@ -175,7 +175,6 @@ the routes file, which is here:
 
 ==== Routes File
 
-	<tt>
   map.resources :chord_qualities do |chord_qualities|
 		chord_qualities.resources :chords do |chords|
 			chords.resources :notes
@@ -203,7 +202,6 @@ the routes file, which is here:
 	map.resources :notes_collection do |notes_collection|
 		notes_collection.resources :chords
 	end
-	</tt>
 	
 ==== REST API Examples
 
