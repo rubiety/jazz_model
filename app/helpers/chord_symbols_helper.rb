@@ -1,2 +1,0 @@
-module ChordSymbolsHelper #:nodoc:
-end

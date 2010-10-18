@@ -1,2 +1,0 @@
-module VoicingTonesHelper #:nodoc:
-end

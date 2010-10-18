@@ -1,2 +1,0 @@
-module ScalesHelper #:nodoc:
-end

@@ -1,2 +1,0 @@
-module ChordQualitiesHelper #:nodoc:
-end

@@ -1,2 +1,0 @@
-module ModesHelper #:nodoc:
-end

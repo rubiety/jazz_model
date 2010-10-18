@@ -1,2 +1,0 @@
-module ScaleTonesHelper #:nodoc:
-end

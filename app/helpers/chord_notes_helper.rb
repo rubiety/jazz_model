@@ -1,2 +1,0 @@
-module ChordNotesHelper
-end

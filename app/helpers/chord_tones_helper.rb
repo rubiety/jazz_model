@@ -1,2 +1,0 @@
-module ChordTonesHelper #:nodoc:
-end
