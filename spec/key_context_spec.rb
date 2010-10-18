@@ -1,9 +1,9 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require "spec_helper"
 
-describe KeyContext do
-	describe "chord without context" do
-	  subject { Chord['maj7'] } 
-	  
+describe JazzModel::KeyContext do
+  describe "chord without context" do
+    subject { JazzModel::Chord['maj7'] } 
+    
     it "should accept key context" do
       subject.in_key_of('G').key.name.should == 'G'
     end
@@ -14,7 +14,7 @@ describe KeyContext do
   end
   
   describe "chord with context" do
-    subject { Chord['Fmaj7'] }
+    subject { JazzModel::Chord['Fmaj7'] }
     
     it "should have correct context" do
       subject.key.name.should == 'F'

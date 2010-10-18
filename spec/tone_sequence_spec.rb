@@ -1,8 +1,8 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-describe ToneSequence do
-  subject { Chord['Cmaj7'] }
-	
+describe JazzModel::ToneSequence do
+  subject { JazzModel::Chord['Cmaj7'] }
+  
   it "should should accept key context" do
     subject.tones.in_key_of('F').notes.first.should == 'F'
   end

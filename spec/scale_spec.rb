@@ -1,16 +1,16 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require "spec_helper"
 
 describe Scale do
-  subject { Scale['Major'] }
+  subject { JazzModel::Scale['Major'] }
   
   it { should be_valid }
   
   it "should recognize symmetric scale" do
-    Scale['Diminished'].should be_symmetric
+    JazzModel::Scale['Diminished'].should be_symmetric
   end
   
   it "should recognize asymmetric scale" do
-    Scale['Major'].should_not be_symmetric
+    JazzModel::Scale['Major'].should_not be_symmetric
   end
   
   it "should accept numeric mode context" do
@@ -34,8 +34,8 @@ describe Scale do
     context "as #{scale}" do
       it "should give correct notes" do
         scale = Scale[scale]
-  			scale.should_not be_nil
-  			scale.notes.should == notes
+        scale.should_not be_nil
+        scale.notes.should == notes
       end
     end
   end
