@@ -1,2 +1,0 @@
-* Add Chord Stubs Functionality - Stored as specific notes, matches to parent chord
-  This will solve potential note-matching issues in the altered chord, for example.

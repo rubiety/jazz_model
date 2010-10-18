@@ -1,7 +1,0 @@
-2008-08-24:
-* Upgraded to Rails 2.1
-* Refactored models to use new Rails 2.1 features.
-
-Old:
-* Implemented REST Interface
-* Added RSpec

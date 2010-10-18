@@ -15,7 +15,7 @@ module ToneSequence
 		self
 	end
 	
-	# Shifts indexes to simulat a key change
+	# Shifts indexes to simulate a key change
 	def in_key_context!
 		self.each do |tone| 
 			tone.tone = (tone.tone + key.index) % 12

@@ -1,8 +1,3 @@
 log/*.log
-tmp/**/*
-.DS_Store
-public/cache/**/*
-doc/api
-doc/app
 db/schema.rb
 db/schema.sql
