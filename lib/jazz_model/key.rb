@@ -11,7 +11,7 @@ module JazzModel
   # interpretations which are rare but theoretically different from their enharmonic 
   # counterparts.
   # 
-  class Key < ActiveRecord::Base
+  class Key < SuperModel::Base
   	Letters = ['C' => 0, 'D' => 1, 'E' => 2, 'F' => 3, 'G' => 4, 'A' => 5, 'B' => 6]
 	
   	# Finds a key given a tonal index 0-11 and a letter index (to disambiguate enharmonic keys)

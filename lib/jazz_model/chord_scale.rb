@@ -13,7 +13,7 @@ module JazzModel
   #
   # Delegates +key+ to the associated chord to access key context through this relationship.
   # 
-  class ChordScale < ActiveRecord::Base
+  class ChordScale < SuperModel::Base
     belongs_to :chord
     belongs_to :mode
   

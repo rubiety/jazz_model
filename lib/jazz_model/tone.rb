@@ -3,7 +3,7 @@ module JazzModel
   # Eventually will be expanded with common functionality for 
   # all tone objects.  
   # 
-  class Tone < ActiveRecord::Base
+  class Tone < SuperModel::Base
   	self.abstract_class = true
 	
   	# Defines constants representing intervals
