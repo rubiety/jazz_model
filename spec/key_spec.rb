@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe JazzModel::Key do
   it "should default to C" do
-    JazzModel::Key::DEFAULT.name.should == "C"
+    JazzModel::Key.default.name.should == "C"
   end
   
   it "should expose 12 primary keys" do

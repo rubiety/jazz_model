@@ -72,14 +72,12 @@ module JazzModel
   #   Scale['Major']['Dorian'].chords.symbols
   #   # => ['min7', 'min6']
   #  
-  class Scale < ActiveRecord::Base
+  class Scale < JazzModel::Base
   	include KeyContext
   	include ModeContext
-	
-  	with_options :dependent => :destroy do |scale|
-  		scale.has_many :modes, :extend => ModeSequence
-  		scale.has_many :tones, :class_name => 'ScaleTone', :extend => ToneSequence
-  	end
+	  
+		has_many :modes, :extend => ModeSequence, :dependent => :destroy
+		has_many :tones, :class_name => 'ScaleTone', :extend => ToneSequence, :dependent => :destroy
 	
   	delegate :notes, :to => :tones
   	delegate :chords, :to => :main_mode

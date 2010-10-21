@@ -78,11 +78,11 @@ module JazzModel
   #   Chord['Amin7'].modes.names
   #   # => ['A Dorian']
   # 
-  class Chord < ActiveRecord::Base
+  class Chord < JazzModel::Base
     include KeyContext
-  
+    
     acts_as_tree
-  
+    
     belongs_to :chord_quality
   
     has_many :symbols, :class_name => 'ChordSymbol', :extend => ChordSymbolCollection

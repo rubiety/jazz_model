@@ -10,7 +10,7 @@ module JazzModel
   # 
   # * +chord+ - Chord associated with the chord symbol.
   # 
-  class ChordSymbol < ActiveRecord::Base
+  class ChordSymbol < JazzModel::Base
     belongs_to :chord
   
     class << self

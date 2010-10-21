@@ -1,10 +1,13 @@
 module JazzModel
+  require "rubygems"
   require "active_support"
-  require "active_model"
-  require "supermodel"
+  require "active_record"
+  require "acts_as_tree"
+  require "acts_as_list"
   
   extend ActiveSupport::Autoload
   
+  autoload :Base
   autoload :Chord
   autoload :ChordCollection
   autoload :ChordQuality
@@ -25,4 +28,6 @@ module JazzModel
   autoload :ToneSequence
   autoload :Voicing
   autoload :VoicingTone
+  
+  autoload :Definition
 end

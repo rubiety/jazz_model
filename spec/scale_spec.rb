@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe Scale do
+describe JazzModel::Scale do
   subject { JazzModel::Scale['Major'] }
   
   it { should be_valid }
@@ -33,7 +33,7 @@ describe Scale do
   pairings.each do |scale, notes|
     context "as #{scale}" do
       it "should give correct notes" do
-        scale = Scale[scale]
+        scale = JazzModel::Scale[scale]
         scale.should_not be_nil
         scale.notes.should == notes
       end

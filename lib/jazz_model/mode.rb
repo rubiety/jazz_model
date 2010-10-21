@@ -25,7 +25,7 @@ module JazzModel
   # Since modes should be accessed within the context of scales, mode-related examples are 
   # actually in scale.  See +Scale+.
   # 
-  class Mode < ActiveRecord::Base
+  class Mode < JazzModel::Base
   	include KeyContext
 	
   	belongs_to :scale
