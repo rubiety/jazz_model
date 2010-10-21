@@ -72,7 +72,7 @@ module JazzModel
   #   Scale['Major']['Dorian'].chords.symbols
   #   # => ['min7', 'min6']
   #  
-  class Scale < SuperModel::Base
+  class Scale < ActiveRecord::Base
   	include KeyContext
   	include ModeContext
 	

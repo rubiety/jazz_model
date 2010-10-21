@@ -78,7 +78,7 @@ module JazzModel
   #   Chord['Amin7'].modes.names
   #   # => ['A Dorian']
   # 
-  class Chord < SuperModel::Base
+  class Chord < ActiveRecord::Base
     include KeyContext
   
     acts_as_tree

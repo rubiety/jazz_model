@@ -1,6 +1,6 @@
 module JazzModel
   module Definitions
-    class Standard < Base
+    class Default < Base
       use(Keys)
       
       def define

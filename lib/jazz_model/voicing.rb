@@ -2,7 +2,7 @@ module JazzModel
   # Represents a specific piano voicing.
   # Work in progress!
   # 
-  class Voicing < SuperModel::Base
+  class Voicing < ActiveRecord::Base
   	belongs_to :chord
   	has_many :voicing_tones
 	

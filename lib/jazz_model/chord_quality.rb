@@ -5,7 +5,7 @@ module JazzModel
   # == Associations
   # * +chords+ - A collection of chords associated with the chord quality.
   # 
-  class ChordQuality < SuperModel::Base
+  class ChordQuality < ActiveRecord::Base
     has_many :chords
 
     class << self
