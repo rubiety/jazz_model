@@ -45,21 +45,21 @@ Everything is under the JazzModel namespace, so first do this if you want to use
   
   include JazzModel
 
-* Getting a Chord object:
+=== Getting a Chord object:
    
   Chord['maj7']
   Chord['Bbmaj7']  # <- With Key Context
   Chord['Abmaj7#11']
   ...
 
-* Getting a Scale object:
+=== Getting a Scale object:
    
   Scale['Major']
   Scale['Melodic Minor']
   Scale['Diminished']
   ...
 
-* Getting a particular mode of a scale:
+=== Getting a particular mode of a scale:
    
   Scale['Major'].modes['Dorian']  # By Mode Name
   Scale['Major'].modes[2]  # By Mode Index
@@ -68,7 +68,7 @@ Everything is under the JazzModel namespace, so first do this if you want to use
   Scale['Major']['Dorian']
   Scale['Major'][2]
 
-* Enumerate notes of a Chord:
+=== Enumerate notes of a Chord:
    
   Chord['maj'].notes   # Defaults to C without specified key context
   # => ['C', 'E', 'G']
@@ -96,7 +96,7 @@ Everything is under the JazzModel namespace, so first do this if you want to use
   # => ['F#', 'A#', 'C#', 'E#']
    
    
-* Enumerate notes of a Scale:
+=== Enumerate notes of a Scale:
    
   Scale['Major'].notes  # Defaults to C without specified key context
   # => ['C', 'D', 'E', 'F', 'G', 'A', 'B']
@@ -114,7 +114,7 @@ Everything is under the JazzModel namespace, so first do this if you want to use
   # => ['C', 'D', 'E', 'F', 'G', 'A', 'Bb', 'B']
    
    
-* Enumerate notes from a Scale Mode:
+=== Enumerate notes from a Scale Mode:
    
   Scale['Major'].in_key_of('Eb').modes['Dorian'].notes
   # => ['F', 'G', 'Ab', 'Bb', 'C', 'D', 'Eb']
@@ -123,7 +123,7 @@ Everything is under the JazzModel namespace, so first do this if you want to use
   # => ['F', 'G', 'A', 'B', 'C', 'D', 'Eb']
    
 
-* Enumerate scale modes associated with a chord:
+=== Enumerate scale modes associated with a chord:
    
   Chord['min7'].modes.names  # .names == .map(&:name)
   # => ['Dorian']
@@ -134,23 +134,23 @@ Everything is under the JazzModel namespace, so first do this if you want to use
   # => ['A Dorian']
    
    
-* Enumerate chords associated with a scale mode:
+=== Enumerate chords associated with a scale mode:
    
   Scale['Major']['Dorian'].chords.symbols
   # => ['min7', 'min6']
   
   Scale['Major'][4].chords.symbols
-	# => ['maj7#11']
+  # => ['maj7#11']
    
 
-* Ruby Example Problem:
+=== Ruby Example Problem:
   Find all chords associated with the Major (Ionian) scale and print 
   each on a new line with the chord tones.
   
   Scale['Major'].chords.map {|c| c.name + ': ' + c.notes.join(', ')} * "\n"
   # => Major 7: C, E, G, B
-	     Major 6: C, E, G, A
-	     Dominant 6/9: C, E, G, Bb, D, A
+       Major 6: C, E, G, A
+       Dominant 6/9: C, E, G, Bb, D, A
 
 These examples should show that with the power of Ruby and the elegant nature of 
 this API, extracting Jazz data from the system is a breeze (even fun!).
