@@ -30,4 +30,5 @@ module JazzModel
   autoload :VoicingTone
   
   autoload :Definition
+  
 end

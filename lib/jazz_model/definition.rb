@@ -7,13 +7,6 @@ module JazzModel
     attr_reader :definition
     attr_reader :included_definitions
     
-    class Context
-      include JazzModel
-      include JazzModel::Tone::Interval
-      include JazzModel::Tone::LetterInterval
-      include JazzModel::Tone::Offsets
-    end
-    
     def initialize(name = nil, &block)
       if name.is_a?(Hash)
         raise ArgumentError, "Only one hash key expected" if name.keys.size > 1
@@ -70,5 +63,4 @@ module JazzModel
   end
 end
 
-# Load Included Definitions:
 Dir[File.join(File.dirname(__FILE__), "definitions", "*.rb")].each {|f| require f}
