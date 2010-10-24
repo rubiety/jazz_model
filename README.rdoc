@@ -28,14 +28,6 @@ of chords, scales, and chord-scales.  There's still a lot of work to do and I ha
 * ChordTone Enumeration
 * Traversing ScaleChord Relationships with Strength Metric
 * Full Understanding of Theoretic Tones (vs. only Pitches)
-* Voicings Associated with Chords
-
-== Anticipated Future Features
-
-* Chord Progression Analysis
-* MIDI Integration
-* User Comments & Contributions (such as Chord-Scale recommendations)
-* Melodic Components & Licks
 
 == Installation
 
@@ -184,3 +176,11 @@ To create a definition, simply do this:
   end
 
 Within the block you'll want to create whatever data is necessary to comprise your definitions.  For examples of definitions, see lib/jazz_model/definitions in the project.  The argument to define acts like rake tasks - use the hash value to define which dependencies your definition has.  In the above case defining "my_definition" will first ensure the "keys" definition is already defined.
+
+== Anticipated Future Features
+
+* Chord Progression Analysis
+* MIDI Integration
+* User Comments & Contributions (such as Chord-Scale recommendations)
+* Melodic Components & Licks
+* Voicings Associated with Chords
