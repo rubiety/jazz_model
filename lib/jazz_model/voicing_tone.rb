@@ -3,9 +3,9 @@ module JazzModel
   # Work in progress!
   # 
   class VoicingTone < Tone
-  	belongs_to :voicing
-	
-  	acts_as_list :scope => :voicing
-	
+    belongs_to :voicing
+  
+    acts_as_list :scope => :voicing
+  
   end
 end

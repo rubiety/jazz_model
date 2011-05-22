@@ -8,25 +8,25 @@ module JazzModel
   # * +without_mode+ - Removes mode context.
   #
   module ModeContext
-  	def self.included(klass)
-  		klass.class_eval do
-  			attr_accessor :mode
-			
-  			def in_mode(value)
-  				if value.is_a?(String)
-  					mode_object = self.respond_to?(:modes) ? self.modes.find_by_name(value) : Mode.find_by_name(value)
-  					self.mode = mode_object.mode unless mode_object.nil?
-  				else
-  					self.mode = value
-  				end
-  				self
-  			end
-			
-  			def without_mode
-  				self.mode = nil
-  				self
-  			end
-  		end
-  	end
+    def self.included(klass)
+      klass.class_eval do
+        attr_accessor :mode
+      
+        def in_mode(value)
+          if value.is_a?(String)
+            mode_object = self.respond_to?(:modes) ? self.modes.find_by_name(value) : Mode.find_by_name(value)
+            self.mode = mode_object.mode unless mode_object.nil?
+          else
+            self.mode = value
+          end
+          self
+        end
+      
+        def without_mode
+          self.mode = nil
+          self
+        end
+      end
+    end
   end
 end
