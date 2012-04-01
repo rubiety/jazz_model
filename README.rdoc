@@ -2,6 +2,11 @@
 
 Jazz Model is full ActiveRecord model of concepts in Jazz theory, establishing relationships between chords and scales, and much more.  Aside from representing jazz theory relationships in the database, jazz model can do key conversions and other operations on these jazz "objects".  By default it uses an in-memory sqlite3 database, but it could be persisted elsewhere.
 
+== Defunct
+
+NOTE: This project is no longer under active development. All work is now devoted to Jazzity, the public interface inspired by this project: http://www.jazzity.com/.
+Sign up there if you're interested in the potential for mathematical analysis of Jazz theory.
+
 == Architecture Overview
 
 The core of Jazz Toolbox is a full Ruby object model representing concepts of Jazz theory, 
