@@ -4,7 +4,7 @@ Jazz Model is full ActiveRecord model of concepts in Jazz theory, establishing r
 
 == Defunct
 
-NOTE: This project is no longer under active development. All work is now devoted to Jazzity, the public interface inspired by this project: http://www.jazzity.com/.
+NOTE: This project is no longer under active development. All work is now devoted to Jazzity, the public interface inspired by this project: http://www.jazzity.com.
 Sign up there if you're interested in the potential for mathematical analysis of Jazz theory.
 
 == Architecture Overview
