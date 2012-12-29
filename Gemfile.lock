@@ -40,9 +40,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord (>= 3.0.0)
-  activesupport (>= 3.0.0)
-  acts_as_list (>= 0.1.2)
-  acts_as_tree (>= 0.1.1)
   jazz_model!
   rspec (~> 2.0)
