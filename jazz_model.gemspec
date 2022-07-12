@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = s.name
   s.required_rubygems_version = ">= 1.3.4"
   
-  s.add_dependency("activerecord", ["~> 3.1.0"])
+  s.add_dependency("activerecord", ">= 3.1", "< 7.1")
   s.add_dependency("activesupport", ["~> 3.1.0"])
   s.add_dependency("acts_as_list", [">= 0.1.2"])
   s.add_dependency("acts_as_tree", [">= 0.1.1"])
